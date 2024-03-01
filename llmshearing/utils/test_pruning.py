@@ -395,7 +395,7 @@ if __name__ == "__main__":
     # retest after setting get_full_zs: ones=True 
     cfg = construct_example_cfg("7B", True) 
     cfg.l0_module.pruning_modules = ["layer", "head", "intermediate", "hidden"]
-    cfg.path = "/projects/DANQIC/mengzhou/LLaMA/mosaic-7B/state_dict.pt"
+    cfg.path = "/home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf/mosaic-7B/state_dict.pt"
     model = build_composer_model(cfg).cuda()
     l0_module = model.model.l0_module
     model.model.l0_module = None

@@ -1,12 +1,19 @@
 # pruning llama2 7b -> 3b or 1.3b
 
 # Please specify the working folder
-PROJ_DIR=/scratch/gpfs/mengzhou/space2/LLM-Shearing
+# PROJ_DIR=/scratch/gpfs/mengzhou/space2/LLM-Shearing
+# LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
+# DATA_DIR=/scratch/gpfs/mengzhou/llm_data/version5-uint16/500b_dedup_4k/for_prune
+# OUTPUT_DIR=/scratch/gpfs/mengzhou/space2/out/test_release_pruning_h100
+# TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
+# MODEL_PATH=/projects/DANQIC/mengzhou/LLaMA2
+
+PROJ_DIR=/home/luoyicong/LLM-Shearing
 LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
-DATA_DIR=/scratch/gpfs/mengzhou/llm_data/version5-uint16/500b_dedup_4k/for_prune
-OUTPUT_DIR=/scratch/gpfs/mengzhou/space2/out/test_release_pruning_h100
+DATA_DIR=/home/luoyicong/LLM-Shearing/llmshearing/data/for_prune
+OUTPUT_DIR=/home/luoyicong/Shear-output/test_release_pruning_h100
 TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
-MODEL_PATH=/projects/DANQIC/mengzhou/LLaMA2
+MODEL_PATH=/home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf
 
 # Specify $PROJ_DIR in scripts/launch.sh and scripts/srun_launch.sh if using slurm
 

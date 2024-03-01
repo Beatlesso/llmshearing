@@ -52,7 +52,7 @@ def get_layer_num_from_weights(weights):
     return max_layer_i + 1
     
 def save_hf_to_composer(hf_model_name_or_path, output_path):
-    """ Convert composer model to huggingface model """ 
+    """ Convert huggingface model to composer model""" 
     model = AutoModelForCausalLM.from_pretrained(hf_model_name_or_path)
     hf_weights = model.state_dict()
     
@@ -105,6 +105,9 @@ def save_composer_to_hf(composer_model_path, output_path=None, model_config:om =
     print(f"saved hf model to {output_path}")
    
 if __name__ == "__main__":
-    composer_model_path, output_path, other_args = sys.argv[1], sys.argv[2], sys.argv[3:]
-    cli_cfg = om.from_cli(other_args)
-    save_composer_to_hf(composer_model_path, output_path, cli_cfg)
+    # composer_model_path, output_path, other_args = sys.argv[1], sys.argv[2], sys.argv[3:]
+    # cli_cfg = om.from_cli(other_args)
+    # save_composer_to_hf(composer_model_path, output_path, cli_cfg)
+
+    hf_model_path, output_path = sys.argv[1], sys.argv[2]
+    save_hf_to_composer(hf_model_path, output_path)

@@ -1,10 +1,16 @@
 # continue pre-train llama2 7b -> 3b or 1.3b
 
-PROJ_DIR=/scratch/gpfs/mengzhou/space2/LLM-Shearing
-DATA_DIR=/scratch/gpfs/mengzhou/llm_data/version5-uint16/500b_dedup_4k/for_ft
-OUTPUT_DIR=/scratch/gpfs/mengzhou/space2/out/test_release
-LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
+# PROJ_DIR=/scratch/gpfs/mengzhou/space2/LLM-Shearing
+# DATA_DIR=/scratch/gpfs/mengzhou/llm_data/version5-uint16/500b_dedup_4k/for_ft
+# OUTPUT_DIR=/scratch/gpfs/mengzhou/space2/out/test_release
+# LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
+# TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
+
+PROJ_DIR=/home/luoyicong/LLM-Shearing
+DATA_DIR=/home/luoyicong/LLM-Shearing/llmshearing/data/for_ft
+OUTPUT_DIR=/home/luoyicong/Shear-output/test_release_pruning_h100
 TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
+MODEL_PATH=/home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf
 
 test=False
 

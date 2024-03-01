@@ -1,12 +1,12 @@
 # pruning llama2 7b -> 3b or 1.3b
 
 # Please specify the working folder
-PROJ_DIR=/scratch/gpfs/mengzhou/space2/LLM-Shearing
+PROJ_DIR=/home/luoyicong/LLM-Shearing
 LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
-DATA_DIR=/scratch/gpfs/mengzhou/llm_data/version5-uint16/500b_dedup_4k/for_prune
-OUTPUT_DIR=/scratch/gpfs/mengzhou/space2/out/test_release_pruning_full
+DATA_DIR=/home/luoyicong/LLM-Shearing/llmshearing/data/for_prune
+OUTPUT_DIR=/home/luoyicong/Shear-output/test_release_pruning_full
 TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
-MODEL_PATH=/projects/DANQIC/mengzhou/LLaMA2
+MODEL_PATH=/home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf
 
 # Specify $PROJ_DIR in scripts/launch.sh and scripts/srun_launch.sh if using slurm
 
@@ -21,10 +21,10 @@ path=$MODEL_PATH/mosaic-7B/state_dict.pt
 data_local=${DATA_DIR}
 
 # basic setup
-max_seq_len=4096
-device_train_microbatch_size=4
-global_train_batch_size=32
-device_eval_batch_size=8
+max_seq_len=1024
+device_train_microbatch_size=1
+global_train_batch_size=2
+device_eval_batch_size=1
 
 # learning setup
 lr=1e-4 # learning rate for the main parameters
@@ -70,16 +70,7 @@ wandb_dir=${save_dir} # save locally
 if [[ $test == True ]]; then t=00-01:00:00; else t=00-20:00:00; fi
 
 # Run in bash, it will automatically use resources available in the current environment
-# composer $TRAIN_SCRIPT \
-
-# Run with slurm    
-sbatch --job-name ${run_name} \
-    --nodes=4 \
-    --gpus-per-node=2 \
-    --mem=512gb \
-    --cpus-per-task=8 \
-    --time $t \
-    $LAUNCH_SCRIPT \
+composer $TRAIN_SCRIPT \
     $config_file \
     run_name=${run_name} \
     data_local=${data_local} \
@@ -114,3 +105,46 @@ sbatch --job-name ${run_name} \
     train_loader.prefetch_factor=null \
     train_loader.persistent_workers=false \
     autoresume=false
+
+# Run with slurm    
+# sbatch --job-name ${run_name} \
+    # --nodes=1 \
+    # --gpus-per-node=2 \
+    # --mem=512gb \
+    # --cpus-per-task=8 \
+    # --time $t \
+    # $LAUNCH_SCRIPT \
+    # $config_file \
+    # run_name=${run_name} \
+    # data_local=${data_local} \
+    # eval_loader.dataset.split=${eval_split_name} \
+    # global_train_batch_size=${global_train_batch_size} \
+    # device_train_microbatch_size=${device_train_microbatch_size} \
+    # device_eval_batch_size=${device_eval_batch_size} \
+    # max_seq_len=${max_seq_len} \
+    # max_duration=${max_duration} \
+    # eval_first=false \
+    # scheduler.t_warmup=${t_warmup} \
+    # save_folder=${save_dir} \
+    # loggers.wandb.init_kwargs.dir=${wandb_dir} \
+    # eval_interval=${eval_interval} \
+    # save_interval=${save_interval} \
+    # optimizer.lr=${lr} \
+    # optimizer.lag_lr=${lag_lr} \
+    # model.path=${path} \
+    # model.l0_module.lagrangian_warmup_steps=${lagr_warmup} \
+    # model.l0_module.pruning_modules='[head,intermediate,layer,hidden]' \
+    # model.l0_module.eval_target_model=${eval_target_model} \
+    # model.l0_module.target_model.d_model=${target_d_model} \
+    # model.l0_module.target_model.n_heads=${target_n_heads} \
+    # model.l0_module.target_model.n_layers=${target_n_layers} \
+    # model.l0_module.target_model.intermediate_size=${target_intermediate_size} \
+    # callbacks.data_loading.dynamic=${dynamic} \
+    # callbacks.data_loading.set_names=${set_names} \
+    # callbacks.data_loading.proportion=${proportion} \
+    # callbacks.data_loading.update_type=${update_type} \
+    # callbacks.data_loading.target_loss=${target_loss} \
+    # train_loader.num_workers=0 \
+    # train_loader.prefetch_factor=null \
+    # train_loader.persistent_workers=false \
+    # autoresume=false
