@@ -21,7 +21,7 @@ path=$MODEL_PATH/mosaic-7B/state_dict.pt
 data_local=${DATA_DIR}
 
 # basic setup
-max_seq_len=1024
+max_seq_len=4096
 device_train_microbatch_size=1
 global_train_batch_size=2
 device_eval_batch_size=1

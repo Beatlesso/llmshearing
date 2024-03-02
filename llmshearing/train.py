@@ -6,6 +6,7 @@ import sys
 import warnings
 from types import MethodType
 from typing import Any, Dict
+import streaming
 
 import torch
 from composer import Logger, State, Trainer
@@ -34,6 +35,7 @@ from llmshearing.callbacks.pruning_callback import PruningCallback
 from llmshearing.datasets.load_text_dataloader import build_text_dataloader
 from llmshearing.models.model_registry import COMPOSER_MODEL_REGISTRY
 
+streaming.base.util.clean_stale_shared_memory()
 
 # 判断训练运行名称是否指示这是一个一小时的训练任务
 def is_one_hour(run_name: str):
