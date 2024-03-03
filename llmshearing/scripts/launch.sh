@@ -11,8 +11,8 @@
 #SBATCH --constraint gpu80
 #SBATCH --output=/scratch/gpfs/mengzhou/space2/out/logs/%x-%j.out
 
-PROJ_DIR=$n/space2/LLM-Shearing
-LOG_DIR=/scratch/gpfs/mengzhou/space2/out/logs
+PROJ_DIR=/home/luoyicong/llmshearing
+LOG_DIR=/home/luoyicong/llmshearing/out/logs
 
 # num_nodes=$(scontrol show job $SLURM_JOB_ID | grep NodeList=della | wc -l)
 num_nodes=$(scontrol show hostnames $SLURM_JOB_NODELIST | wc -l)

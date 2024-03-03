@@ -1,6 +1,6 @@
 data_local: /scratch/gpfs/mengzhou/space2/examples/examples/llm/llama-dedup
 data_remote: # If blank, files must be present in data_local
-tokenizer_name: /home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf
+tokenizer_name: /mnt/llms/model/meta-llama/Llama-2-7b-hf
 max_seq_len: 4096
 global_seed: 17
 
@@ -9,7 +9,7 @@ run_name: # If left blank, will be read from env var $COMPOSER_RUN_NAME
 
 model:
   name: mosaic_llama2_7b 
-  path: /home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf/mosaic-7B/state_dict.pt
+  path: /mnt/yicong.luo/dataset/LLM-Shearing/Llama-2-7b-composer/state_dict.pt
   init_device: "cpu" 
   tokenizer_name: ${tokenizer_name}
   d_model: 4096

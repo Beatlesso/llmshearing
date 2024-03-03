@@ -1,12 +1,12 @@
 # pruning llama2 7b -> 3b or 1.3b
 
 # Please specify the working folder
-PROJ_DIR=/home/luoyicong/LLM-Shearing
+PROJ_DIR=/home/luoyicong/llmshearing
 LAUNCH_SCRIPT=${PROJ_DIR}/llmshearing/scripts/launch.sh
-DATA_DIR=/home/luoyicong/LLM-Shearing/llmshearing/data/for_prune
-OUTPUT_DIR=/home/luoyicong/Shear-output/test_release_pruning_full
+DATA_DIR=/mnt/yicong.luo/dataset/LLM-Shearing/for_prune
+OUTPUT_DIR=/home/luoyicong/llmshearing/Shear-output/test_release_pruning_full
 TRAIN_SCRIPT=${PROJ_DIR}/llmshearing/train.py
-MODEL_PATH=/home/luoyicong/LLM-Shearing/llmshearing/meta-llama/Llama-2-7b-hf
+MODEL_PATH=/mnt/llms/model/meta-llama/Llama-2-7b-hf
 
 # Specify $PROJ_DIR in scripts/launch.sh and scripts/srun_launch.sh if using slurm
 
@@ -15,7 +15,7 @@ test=False
 from_model=7b # source model size
 to_model=2.7b # target model size
 config_file=${PROJ_DIR}/llmshearing/configs/llama2/${from_model}.yaml
-path=$MODEL_PATH/mosaic-7B/state_dict.pt
+path=/mnt/yicong.luo/dataset/LLM-Shearing/Llama-2-7b-composer/state_dict.pt
 
 # data setup
 data_local=${DATA_DIR}
